@@ -24,6 +24,24 @@ jobs:
       - name: Build web assets
         run: npm run build
 
+      - name: Create index.html
+        run: |
+          cat > .output/public/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+            <title>Runtoday</title>
+            <link rel="stylesheet" href="/assets/styles-atHoUAlV.css" />
+          </head>
+          <body>
+            <div id="root"></div>
+            <script type="module" src="/assets/index-CQxLU9LT.js"></script>
+          </body>
+          </html>
+          EOF
+
       - name: Sync Capacitor
         run: npx cap sync android
 
