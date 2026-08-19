@@ -24,23 +24,28 @@ jobs:
       - name: Build web assets
         run: npm run build
 
-      - name: Create index.html
+      - name: Create proper index.html
         run: |
-          cat > .output/public/index.html << 'EOF'
+          CSS_FILE=$(ls .output/public/assets/*.css | head -n 1 | xargs basename)
+          JS_FILE=$(ls .output/public/assets/index-*.js | head -n 1 | xargs basename)
+          
+          cat > .output/public/index.html << EOF
           <!DOCTYPE html>
           <html lang="en">
           <head>
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
             <title>Runtoday</title>
-            <link rel="stylesheet" href="/assets/styles-atHoUAlV.css" />
+            <link rel="stylesheet" href="/assets/${CSS_FILE}" />
           </head>
           <body>
             <div id="root"></div>
-            <script type="module" src="/assets/index-CQxLU9LT.js"></script>
+            <script type="module" src="/assets/${JS_FILE}"></script>
           </body>
           </html>
           EOF
+          
+          echo "Created index.html with CSS: $CSS_FILE and JS: $JS_FILE"
 
       - name: Sync Capacitor
         run: npx cap sync android
