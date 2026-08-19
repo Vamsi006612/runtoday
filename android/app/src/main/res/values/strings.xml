@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Runtoday</string>
+    <string name="title_activity_main">Runtoday</string>
+    <string name="package_name">com.vamsi.marathonprep</string>
+    <string name="custom_url_scheme">com.vamsi.marathonprep</string>
+</resources>
